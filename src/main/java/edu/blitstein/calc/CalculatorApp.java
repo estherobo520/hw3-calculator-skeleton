@@ -2,7 +2,9 @@ package edu.blitstein.calc;
 
 import edu.blitstein.calc.engine.Calculator;
 import edu.blitstein.calc.exception.DivideByZeroException;
+import edu.blitstein.calc.exception.UnknownOpException;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CalculatorApp {
@@ -26,10 +28,24 @@ public class CalculatorApp {
             if ((nextOp == 'e') || (nextOp == 'E'))
                 done = true;
             else {
-                double nextNumber = keyboard.nextDouble();
-                double result = clerk.evaluate(nextOp, clerk.getResult(), nextNumber);
-                System.out.println("result " + nextOp + " " + nextNumber + " = " + result);
-                System.out.println("updated result = " + result);
+                try {
+                    double nextNumber = keyboard.nextDouble();
+                    double result = clerk.evaluate(nextOp, clerk.getResult(), nextNumber);
+                    System.out.println("result " + nextOp + " " + nextNumber + " = " + result);
+                    System.out.println("updated result = " + result);
+                }
+                catch (DivideByZeroException e) {
+                    System.out.println(e.getMessage());
+                }
+                catch (UnknownOpException e) {
+                    System.out.println(e.getMessage());
+                }
+                catch (NumberFormatException e) {
+                    System.out.println(e.getMessage());
+                }
+                catch (InputMismatchException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         }
         System.out.println("The final result is " + clerk.getResult());
