@@ -32,7 +32,7 @@ public class Calculator {
     }
 
     //binary operator
-    public double evaluate(char symbol, double n1, double n2)
+    public double evaluateBinary(char symbol, double n1, double n2)
             throws DivideByZeroException, UnknownOpException {
         double answer;
         BinaryOperation op = BinaryOperationFactory.getOperation(symbol);
@@ -41,7 +41,7 @@ public class Calculator {
     }
 
     //Unary operator
-    public double evaluate(String symbol, double n)
+    public double evaluateUnary(String symbol, double n)
             throws DivideByZeroException, UnknownOpException {
         double answer;
         UnaryOperation op = UnaryOperationFactory.getOperator(symbol);

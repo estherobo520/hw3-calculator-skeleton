@@ -24,15 +24,28 @@ public class CalculatorApp {
         System.out.println("Starting with = " + clerk.getResult());
         boolean done = false;
         while (!done) {
-            char nextOp = (keyboard.next()).charAt(0);
-            if ((nextOp == 'e') || (nextOp == 'E'))
+            String nextStringOp = keyboard.nextLine();
+            char nextCharOp = ' ';
+
+            if (nextStringOp.length() <= 0){
+                nextCharOp = nextStringOp.charAt(0);
+            }
+            if ((nextCharOp == 'e') || (nextCharOp == 'E'))
                 done = true;
             else {
                 try {
-                    double nextNumber = keyboard.nextDouble();
-                    double result = clerk.evaluate(nextOp, clerk.getResult(), nextNumber);
-                    System.out.println("result " + nextOp + " " + nextNumber + " = " + result);
-                    System.out.println("updated result = " + result);
+                    if (nextCharOp !=  ' ') {
+                        double nextNumber = keyboard.nextDouble();
+                        double result = clerk.evaluateBinary(nextCharOp, clerk.getResult(), nextNumber);
+                        System.out.println("result " + nextCharOp + " " + nextNumber + " = " + result);
+                        System.out.println("updated result = " + result);
+                    }
+                    if(nextStringOp != "") {
+                        double nextNumber = keyboard.nextDouble();
+                        double result = clerk.evaluateUnary(nextStringOp, clerk.getResult());
+                        System.out.println("result " + nextCharOp + " " + nextNumber + " = " + result);
+                        System.out.println("updated result = " + result);
+                    }
                 }
                 catch (DivideByZeroException e) {
                     System.out.println(e.getMessage());
